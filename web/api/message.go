@@ -2,7 +2,7 @@ package api
 
 import (
 	"fmt"
-	"github.com/mssola/user_agent"
+	uagent "github.com/mileusna/useragent"
 	"github.com/werberson/prometheus-metrics-sample/web/metrics"
 	"io"
 	"log"
@@ -16,16 +16,16 @@ func MessageHandler(w http.ResponseWriter, r *http.Request) {
 	// start latency time
 	start := time.Now()
 
-	ua := user_agent.New(r.Header.Get("User-Agent"))
-	browser, _ := ua.Browser()
-	platform := ua.Platform()
+	ua := uagent.Parse(r.Header.Get("User-Agent"))
+	browser := ua.Name
+	platform := ua.OS
 
 	if _, ok := buggedPlatform[strings.ToLower(platform)]; ok {
 		time.Sleep(5 * time.Second)
 	}
 
 	statusCode := http.StatusOK
-	if _, err := io.WriteString(w, fmt.Sprintf(`{"message": "Acessando do %v no dispositivo %v."}`, browser, platform)); err != nil {
+	if _, err := io.WriteString(w, fmt.Sprintf(`{"message": "Acessando do %v no sistema %v."}`, browser, platform)); err != nil {
 		statusCode = http.StatusInternalServerError
 		log.Print("Error occurred when writing response message", err)
 	}
