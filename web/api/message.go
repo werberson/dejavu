@@ -25,7 +25,7 @@ func MessageHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	statusCode := http.StatusOK
-	if _, err := io.WriteString(w, fmt.Sprintf(`{"message": "Hello %v on %v device."}`, browser, platform)); err != nil {
+	if _, err := io.WriteString(w, fmt.Sprintf(`{"message": "Acessando do %v no dispositivo %v."}`, browser, platform)); err != nil {
 		statusCode = http.StatusInternalServerError
 		log.Print("Error occurred when writing response message", err)
 	}
