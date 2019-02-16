@@ -1,0 +1,11 @@
+version: '3.5'
+
+services:
+
+  metrics-sample:
+    build: .
+    ports:
+      - "8080:7070"
+    environment:
+      - PORT=7070
+
