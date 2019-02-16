@@ -16,16 +16,19 @@ RUN GIT_COMMIT=$(git rev-parse --short HEAD 2> /dev/null || true) \
     -X github.com/werberson/prometheus-metrics-sample/version.Version=${VERSION:-unknow-version} \
     -X github.com/werberson/prometheus-metrics-sample/version.GitCommit=${GIT_COMMIT} \
     -X github.com/werberson/prometheus-metrics-sample/version.BuildTime=${BUILDTIME}" \
-    -a -installsuffix cgo -o /metrics-sample main.go
+    -a -installsuffix cgo -o metrics-sample main.go
 
-# PKG
-FROM scratch
+ENTRYPOINT [ "/go/src/github.com/werberson/prometheus-metrics-sample/metrics-sample" ]
 
-EXPOSE 7070
+CMD [ "serve" ]
 
-VOLUME [ "/data" ]
-COPY --from=builder /metrics-sample /go/bin/
-
-ENTRYPOINT [ "/go/bin/metrics-sample" ]
+## PKG
+#FROM scratch
+#
+#COPY --from=builder /metrics-sample /go/bin/
+#COPY --from=builder /go/src/github.com/werberson/prometheus-metrics-sample/web/ui/static /
+#
+#
+#ENTRYPOINT [ "/go/bin/metrics-sample" ]
 
 CMD [ "serve" ]

@@ -1,7 +1,6 @@
 package web
 
 import (
-	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/werberson/prometheus-metrics-sample/web/api"
@@ -22,11 +21,9 @@ func Initialize() error {
 	router.PathPrefix("/public").Handler(http.StripPrefix("/public", ui.Handler()))
 	router.Handle("/metrics", promhttp.Handler()).Methods("GET")
 
-	fmt.Println(os.Getenv("PORT"))
-
 	srv := &http.Server{
 		Handler:      router,
-		Addr:         "127.0.0.1:" + os.Getenv("PORT"),
+		Addr:         "0.0.0.0:" + os.Getenv("PORT"),
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}

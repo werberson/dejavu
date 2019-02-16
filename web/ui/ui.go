@@ -5,5 +5,5 @@ import (
 )
 
 func Handler() http.Handler {
-	return http.FileServer(http.Dir("./web/ui/static/"))
+	return http.FileServer(http.Dir("/go/src/github.com/werberson/prometheus-metrics-sample/web/ui/static/"))
 }
