@@ -2,14 +2,15 @@ package api
 
 import (
 	"fmt"
-	uagent "github.com/mileusna/useragent"
-	"github.com/werberson/prometheus-metrics-sample/web/metrics"
 	"io"
 	"log"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
+
+	uagent "github.com/mileusna/useragent"
+	"github.com/werberson/dejavu/web/metrics"
 )
 
 func MessageHandler(w http.ResponseWriter, r *http.Request) {

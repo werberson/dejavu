@@ -2,7 +2,8 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/werberson/prometheus-metrics-sample/version"
+
+	"github.com/werberson/dejavu/version"
 
 	"github.com/spf13/cobra"
 )
