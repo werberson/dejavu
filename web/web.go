@@ -1,14 +1,15 @@
 package web
 
 import (
-	"github.com/gorilla/mux"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"github.com/werberson/prometheus-metrics-sample/web/api"
-	"github.com/werberson/prometheus-metrics-sample/web/ui"
 	"log"
 	"net/http"
 	"os"
 	"time"
+
+	"github.com/gorilla/mux"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/werberson/dejavu/web/api"
+	"github.com/werberson/dejavu/web/ui"
 )
 
 func Initialize() error {
@@ -18,7 +19,7 @@ func Initialize() error {
 	router.HandleFunc("/api/bug/{platform}", api.AddBugHandler).Methods("POST")
 	router.HandleFunc("/api/bug/{platform}", api.RemoveBugHandler).Methods("DELETE")
 
-	router.PathPrefix("/public").Handler(http.StripPrefix("/public", ui.Handler()))
+	router.Handle("/", ui.Handler())
 	router.Handle("/metrics", promhttp.Handler()).Methods("GET")
 
 	srv := &http.Server{

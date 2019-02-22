@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/werberson/prometheus-metrics-sample/web"
+	"github.com/werberson/dejavu/web"
 )
 
 // serveCmd represents the serve command

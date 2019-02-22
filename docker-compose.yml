@@ -2,10 +2,10 @@ version: '3.5'
 
 services:
 
-  metrics-sample:
+  dejavu:
     build: .
     ports:
-      - "8080:7070"
+      - "7070:7070"
     environment:
       - PORT=7070
 
