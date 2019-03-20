@@ -5,7 +5,7 @@ services:
 
   dejavu:
     build: .
-    image: abilioesteves/dejavu:1.0.0
+    image: abilioesteves/dejavu:1.0.2
     ports:
       - "7070:7070"
     environment:
